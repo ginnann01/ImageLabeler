@@ -98,6 +98,7 @@ class GUI(QtGui.QMainWindow):
             msgBox.exec_()
             return
             
+            
         self.WorkDir_relpath = QtGui.QFileDialog.getExistingDirectory(self, u'作業フォルダを選択', self.RootDir_path)
         self.WorkDir_relpath = os.path.relpath(self.WorkDir_relpath, start=self.RootDir_path)
         self.UI.lineEdit_ShowWorkFolder.setText(self.WorkDir_relpath)

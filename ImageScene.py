@@ -58,7 +58,8 @@ class ImageScene(QtGui.QGraphicsScene):
         
         pixmap = self.imageConvert_CV2QT(im)
         self.UpdateScene(pixmap)
-        
+    
+    #データベースから読み込んだ矩形を描画
     def setRectangleFromDatabase(self, rects, labels):
         im = self.input_image.copy()
         
