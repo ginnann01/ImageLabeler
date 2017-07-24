@@ -84,7 +84,7 @@ class GUI(QtGui.QMainWindow):
         for label in self.LabelList:
             cur.execute( "SELECT * FROM sqlite_master WHERE type='table' and name='Labels'" )
             if cur.fetchone() == None:
-                cur.execute("CREATE TABLE Labels (label text, filename text, x integer, y integer, width integer, height integer)")
+                cur.execute("CREATE TABLE Labels (label text, folder text, filename text, x integer, y integer, width integer, height integer)")
                 con.commit()
         con.close()
         
@@ -337,11 +337,13 @@ class GUI(QtGui.QMainWindow):
         if self.isSetRectangle:
             #矩形の保存
             con = sqlite3.connect(os.path.join(self.RootDir_path, self.dbname))
-            sql = "insert into Labels (label, filename, x, y, width, height) values (?, ?, ?, ?, ?, ?)"
-            val = (self.CurrentLabel, self.FileList[self.CurrentFileIndex], self.Label_Rect[0][0], self.Label_Rect[0][1], self.Label_Rect[1][0]-self.Label_Rect[0][0], self.Label_Rect[1][1]-self.Label_Rect[0][1] )
+            sql = "insert into Labels (label, folder, filename, x, y, width, height) values (?, ?, ?, ?, ?, ?, ?)"
+            val = (self.CurrentLabel, self.WorkDir_relpath, self.FileList[self.CurrentFileIndex], self.Label_Rect[0][0], self.Label_Rect[0][1], self.Label_Rect[1][0]-self.Label_Rect[0][0], self.Label_Rect[1][1]-self.Label_Rect[0][1] )
             con.execute(sql, val)
             con.commit()
             con.close()
+            
+            
             
             self.SetImages(self.FileList[self.CurrentFileIndex])
             self.UI.lineEdit_ShowSelectedRectangle.setText(u"矩形が保存されました")
