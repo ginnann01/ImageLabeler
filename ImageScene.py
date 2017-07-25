@@ -53,8 +53,8 @@ class ImageScene(QtGui.QGraphicsScene):
         #OpenCVで読み込んだ画像を持ってるほうがなにかと便利
         im = self.input_image.copy()
         
-        im = cv2.rectangle(im, (int(rect[0][0]), int(rect[0][1])), (int(rect[1][0]), int(rect[1][1])),(0,255,0),1)
-        im = cv2.putText(im, label, (int(rect[0][0]), int(rect[0][1])), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0))       
+        cv2.rectangle(im, (int(rect[0][0]), int(rect[0][1])), (int(rect[1][0]), int(rect[1][1])),(0,255,0),1)
+        cv2.putText(im, label, (int(rect[0][0]), int(rect[0][1])), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0))       
         
         pixmap = self.imageConvert_CV2QT(im)
         self.UpdateScene(pixmap)
@@ -64,8 +64,8 @@ class ImageScene(QtGui.QGraphicsScene):
         im = self.input_image.copy()
         
         for rect, label, in zip(rects, labels):
-            im = cv2.rectangle(im, (int(rect[0]), int(rect[1])), (int(rect[2]), int(rect[3])),(0,255,0),1)
-            im = cv2.putText(im, label, (int(rect[0]), int(rect[1])), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0))
+            cv2.rectangle(im, (int(rect[0]), int(rect[1])), (int(rect[2]), int(rect[3])),(0,255,0),1)
+            cv2.putText(im, label, (int(rect[0]), int(rect[1])), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0))
         
         self.input_image = im.copy()
         
